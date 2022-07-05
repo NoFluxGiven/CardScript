@@ -1,0 +1,32 @@
+title: Blinding Light
+hero: KNIGHT
+mana: 3
+vars:
+  damage: 4
+text: Deal <damage> damage to a target creature.
+tags: combat damage
+effects:
+  on_cast:
+    - TARGET SELECT 1 -> $targets
+    - EACH $targets $target
+    - - DAMAGE $target <damage>
+
+visuals:
+  on_cast:
+    - on caster ATTACH_CAST:
+      - particle: glow
+        duration: 0.6
+        colour: white
+        radius: 1.25
+        alpha: 0.76
+        fadeinout: 0.5
+        growshrink: 0.3
+    - wait 0.2
+    - on target ATTACH_CENTRE:
+      - particle: glow
+        duration: 0.3
+        colour: white
+        radius: 1.8
+        alpha: 1.05
+        fadeinout: 0.2
+        growshrink: -0.3

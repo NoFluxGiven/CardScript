@@ -1,0 +1,21 @@
+title: Blinding Light
+hero: KNIGHT
+mana: 2
+vars:
+  roll_reduction: 2
+  duration: 1R
+  target: MONSTERS
+  roll_type: COMBAT_ROLL
+  damage: 1
+  damage_type: HOLY
+  damage_chance: 30
+text: 3 randomly picked <target> lose <roll_reduction> from their <F/roll_type> for <R/duration>, with a <damage_chance>% chance to take <damage> <damage_type> damage.
+tags: combat debuff hero_favoured global
+effects:
+  on_cast:
+    - TARGET <target> SHUFFLE PICK(3) -> $targets
+    - EACH $targets $target
+    - - APPLY_MODIFIER $target <roll_type> -<roll_reduction> <duration>R
+      - CHANCE <damage_chance> -> $do_damage
+      - IF $do_damage IS TRUE THEN
+      - DAMAGE <damage> <damage_type>
